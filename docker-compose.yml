@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  server:
+    build:
+      context: .
+      dockerfile: './docker/Dockerfile-node'
+    command: 'bash -c "source .env && sh ./scripts/wait-for-db.sh && sh ./scripts/wait-for-redis.sh && bash ./scripts/start.sh"'
+    ports:
+      - '8080:8080'
+      - '65505:65505'
+    working_dir: '/app'
+    links:
+      - db
+      - redis
+    volumes:
+      - '.:/app'
+    env_file:
+      - .env
+
+  redis:
+    image: redis:4.0.8
+    ports:
+      - '6379:6379'
+
+  db:
+    image: postgres:9.6.1
+    ports:
+      - '8555:5432'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'test'
+    volumes:
+      - ./db:/var/lib/postgres/data
