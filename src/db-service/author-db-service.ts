@@ -8,6 +8,10 @@ class AuthorDbService extends BaseDbService<AuthorModel> {
   constructor() {
     super(AuthorModel);
   }
+
+  getByLastName(lastName) : Promise<AuthorModel|null> {
+    return this.model.query().where({ lastName }).first();
+  }
 }
 
 export default new AuthorDbService();

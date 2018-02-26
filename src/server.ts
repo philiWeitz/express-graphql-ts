@@ -1,6 +1,7 @@
 
 import * as cors from 'cors';
 import * as express from 'express';
+import * as jwt from 'express-jwt';
 import * as bodyParser from 'body-parser';
 import * as depthLimit from 'graphql-depth-limit';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
@@ -29,19 +30,22 @@ server.use('*', cors({
   origin: `${config.HOST}:${config.PORT}`
 }));
 
-server.use('/graphql', bodyParser.json(), graphqlExpress((req) => {
-  return {
-    schema,
-    context: { req },
-    validationRules: [depthLimit(config.GRAPH_QL_MAX_DEPTH)],
-  }
-}));
+
+server.use('/graphql', bodyParser.json(), jwt({
+  secret: config.JWT_SECRET,
+  credentialsRequired: false,
+}), graphqlExpress(req => ({
+  schema,
+  context: { req },
+  validationRules: [depthLimit(config.GRAPH_QL_MAX_DEPTH)],
+})));
 
 
 server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: `ws://${config.PUB_SUB_URL}`
 }));
+
 
 // We wrap the express server so that we can attach the WebSocket for subscriptions
 const ws = createServer(server);

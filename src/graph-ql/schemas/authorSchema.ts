@@ -35,16 +35,16 @@ const AuthorType = `
 const AuthorQuery = `
   # Get the author by id
   author(id: Int!): Author
-  @authenticated(roles: ["user"])
 
   # This should be deprecated
   oldAuthorEndpoint(id: Int!): Author
-  @authenticated(roles: ["user"])
   @deprecated
 `;
 
 const AuthorMutation = `
+  # Deletes an author by ID (admin)
   deleteAuthor (authorId: Int!): Author
+  @authenticated(roles: ["admin"])
 `;
 
 

@@ -11,14 +11,21 @@ const customDirectivesSchema = `
 
 const attachDirectives = (schema) => {
   addDirectiveResolveFunctionsToSchema(schema, {
+
     authenticated(resolve, source, args, { req }) {
-      console.log('required roles:', args.roles);
-      return resolve();
+      console.debug('required route roles:', args.roles);
+      if (_.get(args, 'roles', []).includes(_.get(req, 'user.role', null))) {
+        return resolve();
+      }
+      console.error('Error: insufficient role');
+      return null;
     },
+
     async excludeId(resolve) {
       const value = await resolve();
       return _.omit(value, ['id']);
     },
+
     deprecated(resolve) {
       return resolve();
     },

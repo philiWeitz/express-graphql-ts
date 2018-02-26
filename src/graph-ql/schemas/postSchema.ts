@@ -25,15 +25,15 @@ const PostType = `
 const PostQuery = `
   # Get all posts
   posts: [Post]
-  @authenticated(roles: ["admin"])
 `;
 
 const PostMutation = `
+  # Up votes a post
   upvotePost (postId: Int!): Post
-  @authenticated(roles: ["admin"])   
 `;
 
 const PostSubscription = `
+  # Subscribe to an up vote event
   postUpVoted(postId: Int!): Post
 `;
 
