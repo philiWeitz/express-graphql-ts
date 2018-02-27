@@ -1,8 +1,10 @@
 
 
 import * as _ from 'lodash';
+import { GraphQLSchema } from 'graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 
+import ISchema from './schemas/ISchema';
 import directives from './directives';
 import allSchemas from './schemas';
 
@@ -15,13 +17,13 @@ const combine = (schemas, property) => {
   }, '');
 };
 
-const combineType = schemas => combine(schemas, 'type');
-const combineQuery = schemas => combine(schemas, 'query');
-const combineMutation = schemas => combine(schemas, 'mutation');
-const combineSubscriptions = schemas => combine(schemas, 'subscription');
+const combineType = (schemas : ISchema[]) => combine(schemas, 'type');
+const combineQuery = (schemas : ISchema[]) => combine(schemas, 'query');
+const combineMutation = (schemas : ISchema[]) => combine(schemas, 'mutation');
+const combineSubscriptions = (schemas : ISchema[]) => combine(schemas, 'subscription');
 
 
-const typeDefs = `
+const typeDefs : string = `
   ${directives.schema}
   ${combineType(allSchemas)}
   
@@ -43,13 +45,13 @@ const typeDefs = `
 
 const resolvers = _.merge({}, ...allSchemas.map(schema => schema.resolver));
 
-const schema = makeExecutableSchema({
+const schema : GraphQLSchema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
 
-const schemaWithCustomDirectives = directives.attachDirectives(schema);
+const schemaWithCustomDirectives : GraphQLSchema = directives.attachDirectives(schema);
 
 
 export default schemaWithCustomDirectives;

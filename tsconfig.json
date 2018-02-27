@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
     "target": "es6",
     "jsx": "react",
     "module": "commonjs",
@@ -14,6 +13,8 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "outDir": "build",
 
     "lib": [

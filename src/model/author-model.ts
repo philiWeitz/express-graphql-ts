@@ -7,11 +7,11 @@ export default class AuthorModel extends BaseModel {
   firstName: string;
   lastName: string;
 
-  public init(firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  constructor(firstName?, lastName?) {
+    super();
 
-    return this;
+    this.firstName = firstName || '';
+    this.lastName = lastName || '';
   }
 
   static tableName = 'author';

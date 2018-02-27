@@ -9,7 +9,7 @@ class AuthorDbService extends BaseDbService<AuthorModel> {
     super(AuthorModel);
   }
 
-  getByLastName(lastName) : Promise<AuthorModel|null> {
+  getByLastName(lastName : string) : Promise<AuthorModel|null> {
     return this.model.query().where({ lastName }).first();
   }
 }

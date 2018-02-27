@@ -10,7 +10,7 @@ class PostDbService extends BaseDbService<PostModel> {
   }
 
   getByAuthorId(authorId : number) : Promise<PostModel|undefined> {
-    return PostModel.query().where('authorId', authorId).first();
+    return this.model.query().where('authorId', authorId).first();
   }
 }
 

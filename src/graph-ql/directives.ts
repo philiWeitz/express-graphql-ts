@@ -1,15 +1,18 @@
 
 import * as _ from 'lodash';
+import { GraphQLSchema } from 'graphql';
 import { addDirectiveResolveFunctionsToSchema } from 'graphql-directive';
 
 
-const customDirectivesSchema = `
+// schema for all custom directives
+const customDirectivesSchema : string = `
   directive @authenticated(roles: [String]) on QUERY | FIELD_DEFINITION
   directive @excludeId on FIELD_DEFINITION
 `;
 
 
-const attachDirectives = (schema) => {
+// attaches the custom directives resolvers to the schema
+const attachDirectives = (schema : GraphQLSchema) : GraphQLSchema => {
   addDirectiveResolveFunctionsToSchema(schema, {
 
     authenticated(resolve, source, args, { req }) {

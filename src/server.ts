@@ -36,6 +36,8 @@ server.use('/graphql', bodyParser.json(), jwt({
   credentialsRequired: false,
 }), graphqlExpress(req => ({
   schema,
+  debug: false,
+  tracing: false,
   context: { req },
   validationRules: [depthLimit(config.GRAPH_QL_MAX_DEPTH)],
 })));
