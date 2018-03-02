@@ -20,6 +20,7 @@ class Config {
   static readonly REDIS_HOST: string = process.env.REDIS_HOST || 'redis';
   static readonly REDIS_PORT: number = _.parseInt(process.env.REDIS_PORT) || 6379;
   static readonly REDIS_PASSWORD : string = process.env.REDIS_PASSWORD || 'password';
+  static readonly REDIS_DEFAULT_EXPIRE : number = _.parseInt(process.env.REDIS_DEFAULT_EXPIRE) || 20 ;
 
   // JWT
   static readonly JWT_SECRET: string = process.env.REDIS_HOST || 'very_secret';
