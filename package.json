@@ -39,6 +39,7 @@
     "knex": "0.14.2",
     "lodash": "4.17.5",
     "objection": "1.0.0",
+    "parse-database-url": "0.3.0",
     "pg": "7.4.0",
     "redis": "2.8.0",
     "subscriptions-transport-ws": "0.9.6",

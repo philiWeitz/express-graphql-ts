@@ -12,7 +12,10 @@ const redisOptions: ClientOpts = {
 
 class RedisUtil {
 
-  readonly client : RedisClient = redis.createClient(redisOptions);
+  // if redis url is specified use that one, otherwise separate definitions
+  readonly client : RedisClient = config.REDIS_URL
+    ? redis.createClient(config.REDIS_URL)
+    : redis.createClient(redisOptions);
 
 
   // TODO: promisify client.get
