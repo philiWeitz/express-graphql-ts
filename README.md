@@ -31,3 +31,6 @@
 }
 
 ```
+
+## Additional Pages
+- **[Visualize GraphQL Schema](docs/schemaVisualization.md)**

@@ -12,7 +12,7 @@
   "scripts": {
     "build": "yarn tsc",
     "watch-ts": "yarn tsc -- --watch",
-    "watch-js": "nodemon --inspect=0.0.0.0:65505 ./build/server.js",
+    "watch-js": "nodemon --inspect=0.0.0.0:65505 ./build/server.js --delay 1000ms",
     "start-debug": "concurrently \"yarn watch-ts\" \"yarn watch-js\"",
     "migrate-db": "knex migrate:latest",
     "seed-db": "knex seed:run"

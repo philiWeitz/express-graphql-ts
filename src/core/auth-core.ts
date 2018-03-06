@@ -16,7 +16,10 @@ class AuthCore {
         firstName: author.firstName,
         lastName: author.lastName,
         role: UserRole.ADMIN,
-      }, config.JWT_SECRET);
+      }, config.JWT_SECRET, {
+        // valid for one hour
+        expiresIn: 60 * 60
+      });
 
       return { token };
     }

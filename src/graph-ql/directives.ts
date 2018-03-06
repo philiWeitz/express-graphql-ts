@@ -8,6 +8,7 @@ import { addDirectiveResolveFunctionsToSchema } from 'graphql-directive';
 const customDirectivesSchema : string = `
   directive @authenticated(roles: [String]) on QUERY | FIELD_DEFINITION
   directive @excludeId on FIELD_DEFINITION
+  directive @includeByRole(roles: [String]) on FIELD_DEFINITION
 `;
 
 
@@ -22,6 +23,14 @@ const attachDirectives = (schema : GraphQLSchema) : GraphQLSchema => {
       }
       console.error('Error: insufficient role');
       return null;
+    },
+
+    async includeByRole(resolve, source, args, { req }) {
+      const result = await resolve();
+      if (!_.get(args, 'roles', []).includes(_.get(req, 'user.role', null))) {
+        return null;
+      }
+      return result;
     },
 
     async excludeId(resolve) {

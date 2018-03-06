@@ -7,8 +7,7 @@ class Config {
 
   // Server configuration
   static readonly HOST: string = process.env.HOST || 'http://0.0.0.0';
-  static readonly PORT: string = process.env.PORT || '8080';
-  static readonly CORS_ENABLED: boolean = Boolean(process.env.CORS_ENABLED) || true;
+  static readonly PORT: number = _.parseInt(process.env.PORT) || 8080;
 
   // GraphQL configuration
   static readonly GRAPH_QL_MAX_DEPTH: number = _.parseInt(process.env.GRAPH_QL_MAX_DEPTH) || 10;

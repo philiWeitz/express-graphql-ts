@@ -49,6 +49,16 @@ server.use('/graphiql', graphiqlExpress({
 }));
 
 
+server.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(err.status).send({
+    statusCode: err.status,
+    error: err.name,
+    message: err.message,
+  });
+});
+
+
 // We wrap the express server so that we can attach the WebSocket for subscriptions
 const ws = createServer(server);
 

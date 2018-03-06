@@ -18,6 +18,7 @@ class AuthorSchema implements ISchema {
   
       # Description for last name attribute
       lastName: String
+      @includeByRole(roles: ["admin"])
     }
   
     # Description for Author type
