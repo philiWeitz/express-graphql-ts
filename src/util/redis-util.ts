@@ -4,13 +4,21 @@ import { RedisClient, ClientOpts } from "redis";
 
 import config from '../config';
 
+const parseRedisUrl = require('parse-redis-url')(redis);
+
 const redisOptions: ClientOpts = {
   port: config.REDIS_PORT,
   host: config.REDIS_HOST,
   password: config.REDIS_PASSWORD,
 };
 
+
 class RedisUtil {
+
+  // for some redis clients we need the parsed redis URL
+  readonly redisConnection : object = config.REDIS_URL
+    ? parseRedisUrl.parse(config.REDIS_URL)
+    : redisOptions;
 
   // if redis url is specified use that one, otherwise separate definitions
   readonly client : RedisClient = config.REDIS_URL
