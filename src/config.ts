@@ -1,7 +1,7 @@
 
 import * as _ from 'lodash';
 
-class Config {
+abstract class Config {
 
   static readonly NODE_ENV: string = process.env.NODE_ENV || 'development';
 
@@ -19,6 +19,7 @@ class Config {
   static readonly REDIS_HOST: string = process.env.REDIS_HOST || 'redis';
   static readonly REDIS_PORT: number = _.parseInt(process.env.REDIS_PORT) || 6379;
   static readonly REDIS_PASSWORD : string = process.env.REDIS_PASSWORD || 'password';
+  // default redis cache time in seconds
   static readonly REDIS_DEFAULT_EXPIRE : number = _.parseInt(process.env.REDIS_DEFAULT_EXPIRE) || 20;
   static readonly REDIS_URL: string|undefined = process.env.REDIS_URL;
 
