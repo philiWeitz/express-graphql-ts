@@ -27,7 +27,7 @@ const server = express();
 
 
 server.use('*', cors({
-  origin: `${config.HOST}:${config.PORT}`
+  origin: '*'
 }));
 
 

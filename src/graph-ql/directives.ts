@@ -22,7 +22,7 @@ const attachDirectives = (schema : GraphQLSchema) : GraphQLSchema => {
         return resolve();
       }
       console.error('Error: insufficient role');
-      return null;
+      throw new Error('Unauthorized');
     },
 
     async includeByRole(resolve, source, args, { req }) {

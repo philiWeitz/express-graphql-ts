@@ -1,8 +1,8 @@
 
 import ISchema from './ISchema';
-import AuthSchema from './authSchema';
-import PostSchema from './postSchema';
-import AuthorSchema from './authorSchema';
+import AuthSchema from './auth-schema';
+import PostSchema from './post-schema';
+import AuthorSchema from './author-schema';
 
 const schemas : ISchema[] = [
   new AuthSchema(),

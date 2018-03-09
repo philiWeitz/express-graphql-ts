@@ -27,7 +27,7 @@ class PostSchema implements ISchema {
 
   query = `
     # Get all posts
-    posts: [Post]
+    posts(size: Int): [Post]
   `;
 
   mutation = `
@@ -42,7 +42,10 @@ class PostSchema implements ISchema {
 
   resolver = {
     Query: {
-      posts: postCore.getPosts,
+      posts: async (root, { size }) => {
+        const posts = await postCore.getPosts();
+        return posts.slice(0, size || Number.MAX_SAFE_INTEGER);
+      }
     },
     Mutation: {
       upvotePost: async (root, { postId }) => {
